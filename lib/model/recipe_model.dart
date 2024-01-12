@@ -1,4 +1,6 @@
-class Recipe {
+import 'package:conduit_codable/conduit_codable.dart';
+
+class Recipe extends Coding {
   String? title;
   String? id;
   List<Ingredient>? extendedIngredients;
@@ -6,7 +8,7 @@ class Recipe {
   String? summary;
 }
 
-class Ingredient {
+class Ingredient extends Coding {
   int? id;
   String? aisle;
   String? imageUrl;
