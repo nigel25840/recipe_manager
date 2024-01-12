@@ -7,6 +7,7 @@ abstract class IAppFacade {
 
 class AppFacade implements IAppFacade {
   @override
+  // fetches all recipes, both remote and local
   Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List? ingredients}){
     return null;
   }
