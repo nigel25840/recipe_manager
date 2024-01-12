@@ -6,6 +6,11 @@ class Recipe extends Coding {
   List<Ingredient>? extendedIngredients;
   String? image;
   String? summary;
+
+  @override
+  void encode(KeyedArchive object) {
+    // TODO: implement encode
+  }
 }
 
 class Ingredient extends Coding {
@@ -14,4 +19,9 @@ class Ingredient extends Coding {
   String? imageUrl;
   String? name;
   double? amount;
+
+  @override
+  void encode(KeyedArchive object) {
+    // TODO: implement encode
+  }
 }
