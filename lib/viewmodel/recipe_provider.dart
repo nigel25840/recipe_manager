@@ -19,10 +19,7 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> initializeProvider() async {
     setViewState(ViewState.busy);
-    // await Future.delayed(Duration(seconds: 3), () {
-    //   setViewState(ViewState.idle);
-    // });
-    await appFacade.fetchRecipes(ingredients: []);
+    await getAllRecipes(ingredients: []);
     setViewState(ViewState.idle);
   }
 
@@ -36,6 +33,7 @@ class RecipeProvider extends ChangeNotifier {
     }, (success) {
       allRecipes = success;
     });
+    setViewState(ViewState.idle);
   }
 
   void setViewState(ViewState viewState) {
