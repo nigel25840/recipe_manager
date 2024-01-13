@@ -32,7 +32,7 @@ class ApiRepository<T extends Coding> {
       }).toList();
       return Future.value(Right(items));
     } else {
-      return Left(ServerException(
+      return Left(ServerFailure(
         code: response.statusCode,
         message: _getErrorDetail(response),
       ));

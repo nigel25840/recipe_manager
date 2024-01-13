@@ -10,6 +10,7 @@ class Recipe extends Coding {
   List<Ingredient> ingredients = [];
   String? image;
   String? summary;
+  bool saved = false;
 
   @override
   void decode(KeyedArchive object) {

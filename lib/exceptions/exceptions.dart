@@ -1,5 +1,5 @@
-class ServerException implements Exception {
+class ServerFailure implements Exception {
   final int code;
   final String message;
-  ServerException({required this.code, required this.message});
+  ServerFailure({required this.code, required this.message});
 }
