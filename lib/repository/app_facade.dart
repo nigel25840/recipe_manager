@@ -20,17 +20,14 @@ class AppFacade implements IAppFacade {
     // then perform an API call to fetch remote recipes matching the ingredients
     Either<Exception, List<Coding>> eitherResponse = await apiRecipeRepo.fetchAll();
     return await eitherResponse.fold(
-        (Exception ex) async {
+        (exception) async {
           return left(ServerFailure(code: 400, message: 'The request failed'));
         },
-        (List<Coding> success) {
+        (success) {
           return right([]);
         }
     );
 
     // merge the two data sets
-
-
-    return null;
   }
 }

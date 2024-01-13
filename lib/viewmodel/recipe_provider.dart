@@ -13,26 +13,22 @@ class RecipeProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
   late void Function(String)? _onError;
 
-  RecipeProvider({void Function(String)? errorCallback}){
+  RecipeProvider({void Function(String)? errorCallback}) {
     _onError = errorCallback;
   }
 
-  Future<void> initializeProvider() async {
+  Future<void> initializeProvider() async {}
 
-  }
-
-  Future<void> setRecipes({required List<Recipe> recipes}) async {
-
-  }
+  Future<void> setRecipes({required List<Recipe> recipes}) async {}
 
   Future<void> getAllRecipes({List<String>? ingredients}) async {
     setViewState(ViewState.busy);
-    final response = await appFacade.fetchRecipes();
-    response?.fold((failure){
+    final response = await appFacade.fetchRecipes<Recipe>();
+    response?.fold((failure) {
       _onError?.call('Server failure, please check back');
-    }
-
-    );
+    }, (success) {
+      allRecipes = success;
+    });
   }
 
   void setViewState(ViewState viewState) {
