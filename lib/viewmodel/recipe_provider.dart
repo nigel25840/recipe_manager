@@ -19,9 +19,11 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> initializeProvider() async {
     setViewState(ViewState.busy);
-    await Future.delayed(Duration(seconds: 3), () {
-      setViewState(ViewState.idle);
-    });
+    // await Future.delayed(Duration(seconds: 3), () {
+    //   setViewState(ViewState.idle);
+    // });
+    await appFacade.fetchRecipes(ingredients: []);
+    setViewState(ViewState.idle);
   }
 
   Future<void> setRecipes({required List<Recipe> recipes}) async {}
