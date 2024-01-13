@@ -5,6 +5,8 @@ library recipe_management.globals;
 String apiKey = '9cdd0725f3a1411fae547fba718cce83';
 String apiBaseUrl = 'https://api.spoonacular.com/';
 
+enum ViewState { idle, busy }
+
 class Endpoints {
   static String searchByIngredients = 'recipes/findByIngredients';
 }
