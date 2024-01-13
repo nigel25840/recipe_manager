@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_management/dependencies.dart';
 import 'package:recipe_management/viewmodel/recipe_provider.dart';
 
-void main() {
+import '../globals.dart';
+
+void main() async {
+  await initiateDependencies();
   runApp(const MyApp());
 }
 
@@ -25,6 +29,7 @@ class MyApp extends StatelessWidget {
 
 class MainView extends StatelessWidget {
   late final String title;
+  final TextStyle style = TextStyle(fontSize: 30);
   MainView({required String title});
 
   @override
@@ -42,10 +47,13 @@ class MainView extends StatelessWidget {
           title: Text('Recipe Manager'),
           backgroundColor: Colors.green,
         ),
-        body: Center(
-          child: Text(
-            'Test Harness App',
-            style: TextStyle(fontSize: 30),
+        body: Container(
+          child: Consumer<RecipeProvider>(
+            builder: (_, RecipeProvider provider, __) {
+              return provider.state == ViewState.idle
+                  ? Text('My Recipes', style: style)
+                  : Center(child: CircularProgressIndicator());
+            },
           ),
         ),
       ),

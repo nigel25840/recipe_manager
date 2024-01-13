@@ -17,7 +17,12 @@ class RecipeProvider extends ChangeNotifier {
     _onError = errorCallback;
   }
 
-  Future<void> initializeProvider() async {}
+  Future<void> initializeProvider() async {
+    setViewState(ViewState.busy);
+    await Future.delayed(Duration(seconds: 3), () {
+      setViewState(ViewState.idle);
+    });
+  }
 
   Future<void> setRecipes({required List<Recipe> recipes}) async {}
 
@@ -36,5 +41,5 @@ class RecipeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ViewState get state => state;
+  ViewState get state => _state;
 }
