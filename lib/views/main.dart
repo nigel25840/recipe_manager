@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_management/viewmodel/recipe_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,15 +29,24 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Recipe Manager'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Text(
-          'Test Harness App',
-          style: TextStyle(fontSize: 30),
+    return ChangeNotifierProvider(
+      create: (_) => RecipeProvider(
+        errorCallback: (String message) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+        },
+      )..initializeProvider(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Recipe Manager'),
+          backgroundColor: Colors.green,
+        ),
+        body: Center(
+          child: Text(
+            'Test Harness App',
+            style: TextStyle(fontSize: 30),
+          ),
         ),
       ),
     );
