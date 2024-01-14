@@ -3,7 +3,7 @@ import 'package:recipe_management/globals.dart';
 
 class IngredientsProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
-  List<String> inStockIngredients = [];
+  List<String> inStockIngredients = ['eggs', 'cheese', 'anchovies', 'peppers'];
 
   Future<void> initializeProvider() async {
     // initialize local storage
@@ -18,12 +18,16 @@ class IngredientsProvider extends ChangeNotifier {
 
     // update local storage
 
+    inStockIngredients.add(item);
+
     setViewState(ViewState.idle);
   }
 
   Future<void> deleteItem({required String item}) async {
     // delete the item from local storage
-
+    if(inStockIngredients.contains(item)) {
+      inStockIngredients.remove(item);
+    }
     setViewState(ViewState.idle);
   }
 

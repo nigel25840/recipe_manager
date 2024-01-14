@@ -9,41 +9,31 @@ class MenuDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
-            ),
-            child: Text(
-              'Drawer Header',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
+          Container(
+            height: 100,
+            child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black38,
               ),
+              child: Text(''),
             ),
           ),
           ListTile(
             title: Text('Ingredients'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IngredientsView()),
-              );
-            },
+            onTap: () => _navigate(context, MaterialPageRoute(builder: (context) => IngredientsView())),
           ),
           ListTile(
             title: Text('Recipes'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainRecipesView()),
-              );
-            },
+            onTap: () => _navigate(context, MaterialPageRoute(builder: (context) => MainRecipesView())),
           ),
           // Add more ListTile items as needed
         ],
       ),
     );
+  }
+
+  void _navigate(BuildContext context, MaterialPageRoute route) {
+    Navigator.pop(context); // Close the drawer
+    Navigator.push(context, route);
   }
 }
