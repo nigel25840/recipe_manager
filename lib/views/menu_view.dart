@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_management/utils/route_definitions.dart';
+import 'package:recipe_management/views/ingredients_view.dart';
+import 'package:recipe_management/views/main_recipes_view.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -21,16 +22,23 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Item 1'),
+            title: Text('Ingredients'),
             onTap: () {
               Navigator.pop(context); // Close the drawer
-              Navigator.pushNamed(context, RouteDefinitions.kRouteRecipes);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => IngredientsView()),
+              );
             },
           ),
           ListTile(
-            title: Text('Item 2'),
+            title: Text('Recipes'),
             onTap: () {
-              // Handle item 2 tap
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainRecipesView()),
+              );
             },
           ),
           // Add more ListTile items as needed
