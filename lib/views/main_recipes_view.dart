@@ -21,7 +21,7 @@ class MainRecipesView extends StatelessWidget {
         },
       )..initializeProvider(),
       child: Scaffold(
-        drawer: MenuDrawer(),
+        endDrawer: MenuDrawer(),
         appBar: AppBar(
           title: Text('Recipe Manager'),
           backgroundColor: Colors.green,

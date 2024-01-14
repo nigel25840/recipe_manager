@@ -7,7 +7,7 @@ class IngredientsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MenuDrawer(),
+      endDrawer: MenuDrawer(),
       appBar: AppBar(
         title: Text('Recipe Manager'),
         backgroundColor: Colors.green,
