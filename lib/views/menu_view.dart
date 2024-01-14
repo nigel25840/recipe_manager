@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_management/utils/route_definitions.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -22,7 +23,8 @@ class MenuDrawer extends StatelessWidget {
           ListTile(
             title: Text('Item 1'),
             onTap: () {
-              // Handle item 1 tap
+              Navigator.pop(context); // Close the drawer
+              Navigator.pushNamed(context, RouteDefinitions.kRouteRecipes);
             },
           ),
           ListTile(

@@ -12,7 +12,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case RouteDefinitions.kRouteRecipes:
       return MaterialPageRoute(builder: (_) => MainRecipesView());
-    // case RouteDefinitions.kRouteIngredients:
-    //   return MaterialPageRoute(builder: (_) => )
+    case RouteDefinitions.kRouteIngredients:
+      return MaterialPageRoute(builder: (_) => IngredientsView());
   }
 }
