@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
+import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/viewmodel/recipe_provider.dart';
+import 'package:recipe_management/views/menu_view.dart';
+import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
-class MainView extends StatelessWidget {
+class MainRecipesView extends StatelessWidget {
   late final String title;
-  final TextStyle style = TextStyle(fontSize: 30);
-  MainView({required String title});
+  MainRecipesView({String? title});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class MainView extends StatelessWidget {
         },
       )..initializeProvider(),
       child: Scaffold(
+        drawer: MenuDrawer(),
         appBar: AppBar(
           title: Text('Recipe Manager'),
           backgroundColor: Colors.green,
@@ -27,12 +30,23 @@ class MainView extends StatelessWidget {
           child: Consumer<RecipeProvider>(
             builder: (_, RecipeProvider provider, __) {
               return provider.state == ViewState.idle
-                  ? Text('My Recipes', style: style)
+                  ? recipeList(provider: provider)
                   : Center(child: CircularProgressIndicator());
             },
           ),
         ),
       ),
     );
+  }
+
+  Widget recipeList({required RecipeProvider provider}) {
+    // return RecipeTile(recipe: provider.allRecipes[0]);
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          Recipe recipe = provider.allRecipes[index];
+          return RecipeTile(recipe: recipe);
+        },
+        separatorBuilder: (context, index) => Divider(height: 25, color: Colors.blue,),
+        itemCount: provider.allRecipes.length);
   }
 }

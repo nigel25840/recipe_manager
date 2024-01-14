@@ -10,6 +10,7 @@ class Recipe extends Coding {
   List<Ingredient> ingredients = [];
   String? image;
   String? summary;
+  int? likes;
   bool saved = false;
 
   @override
@@ -18,6 +19,7 @@ class Recipe extends Coding {
     title = object.decode('title');
     id = object.decode('id');
     image = object.decode('image');
+    likes = object.decode('likes');
     missedIngredients = object.decodeObjects('missedIngredients', Ingredient.new);
     usedIngredients = object.decodeObjects('usedIngredients', Ingredient.new);
 

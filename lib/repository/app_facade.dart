@@ -25,7 +25,8 @@ class AppFacade implements IAppFacade {
           return left(ServerFailure(code: 400, message: 'The request failed'));
         },
         (success) {
-          return right(success);
+          List<T> typedList = success.map<T>((coding) => coding as T).toList();
+          return right(typedList);
         }
     );
 

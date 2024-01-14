@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/repository/app_facade.dart';
+import 'package:recipe_management/utils/app_constants.dart';
 
 import '../model/recipe_model.dart';
 
@@ -29,10 +30,8 @@ class RecipeProvider extends ChangeNotifier {
     setViewState(ViewState.busy);
     final response = await appFacade.fetchRecipes<Recipe>();
     response?.fold((failure) {
-      _onError?.call('Server failure, please check back');
-    }, (success) {
-      allRecipes = success;
-    });
+      _onError?.call(AppConstants.kServerError);
+    }, (success) => allRecipes = success);
     setViewState(ViewState.idle);
   }
 
