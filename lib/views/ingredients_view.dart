@@ -43,11 +43,11 @@ class IngredientsView extends StatelessWidget {
                   ),
                 ],
               ),
-              // Consumer<IngredientsProvider>(builder: (_, provider, __) {
-              //   return provider.state == ViewState.idle
-              //       ? Expanded(child: ingredientsList(provider: provider))
-              //       : CircularProgressIndicator();
-              // })
+              Consumer<IngredientsProvider>(builder: (_, provider, __) {
+                return provider.state == ViewState.idle
+                    ? Expanded(child: ingredientsList(provider: provider))
+                    : CircularProgressIndicator();
+              })
             ],
           )
           ,
