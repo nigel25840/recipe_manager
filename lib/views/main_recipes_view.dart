@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/viewmodel/recipe_provider.dart';
+import 'package:recipe_management/views/grocery_list_view.dart';
 import 'package:recipe_management/views/menu_view.dart';
 import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
@@ -44,9 +45,22 @@ class MainRecipesView extends StatelessWidget {
     return ListView.separated(
         itemBuilder: (context, index) {
           Recipe recipe = provider.allRecipes[index];
-          return RecipeTile(recipe: recipe);
+          return GestureDetector(
+            child: RecipeTile(recipe: recipe),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GroceryListView(recipe: recipe),
+                ),
+              );
+            },
+          );
         },
-        separatorBuilder: (context, index) => Divider(height: 25, color: Colors.blue,),
+        separatorBuilder: (context, index) => Divider(
+              height: 25,
+              color: Colors.blue,
+            ),
         itemCount: provider.allRecipes.length);
   }
 }
