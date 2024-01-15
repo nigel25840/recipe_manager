@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/recipe_model.dart';
+import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/viewmodel/recipe_provider.dart';
 import 'package:recipe_management/views/grocery_list_view.dart';
 import 'package:recipe_management/views/menu_view.dart';
@@ -57,10 +58,7 @@ class MainRecipesView extends StatelessWidget {
             },
           );
         },
-        separatorBuilder: (context, index) => Divider(
-              height: 25,
-              color: Colors.blue,
-            ),
+        separatorBuilder: (context, index) => AppConstants.kDefaultDivider,
         itemCount: provider.allRecipes.length);
   }
 }

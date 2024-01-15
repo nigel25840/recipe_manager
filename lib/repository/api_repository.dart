@@ -19,7 +19,7 @@ class ApiRepository<T extends Coding> {
 
   Future<Either<Exception, List<T>>> fetchAll() async {
     String urlString =
-        'https://api.spoonacular.com/recipes/findByIngredients?ingredients=chocolate,+walnuts,+sugar&number=5&apiKey=9cdd0725f3a1411fae547fba718cce83';
+        'https://api.spoonacular.com/recipes/findByIngredients?ingredients=eggs,+walnuts,+sugar,+cranberries&number=5&apiKey=9cdd0725f3a1411fae547fba718cce83';
     Uri url = Uri.parse(urlString);
     Response response = await client.get(url, headers: headers);
 

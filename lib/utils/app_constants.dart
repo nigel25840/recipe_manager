@@ -10,4 +10,14 @@ class AppConstants {
     fontSize: 20,
     fontWeight: FontWeight.normal,
   );
+  static const TextStyle kTextStyleTitle = TextStyle(
+    fontSize: 23,
+    fontWeight: FontWeight.bold,
+  );
+
+  // UI styles
+  static const kDefaultDivider = Divider(
+    height: 25,
+    color: Colors.blue,
+  );
 }
