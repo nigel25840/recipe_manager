@@ -33,10 +33,4 @@ class Ingredient extends Coding {
 
     print(object.toString());
   }
-
-
-
-  // void save() {
-  //   final IAppFacade appFacade = GetIt.instance<IAppFacade>();
-  // }
 }
