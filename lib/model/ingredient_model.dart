@@ -12,6 +12,17 @@ class Ingredient extends Coding {
   bool onHand = false;
 
   @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Ingredient &&
+        runtimeType == other.runtimeType &&
+        name == other.name;
+  }
+
+  @override
+  int get hashCode => name.hashCode ?? 0;
+
+  @override
   void decode(KeyedArchive object) {
     super.decode(object);
     id = object.decode('id');

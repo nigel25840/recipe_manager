@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_management/globals.dart';
+import 'package:recipe_management/model/ingredient_model.dart';
 
 class IngredientsProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
-  List<String> inStockIngredients = ['eggs', 'cheese', 'anchovies', 'peppers'];
+  List<Ingredient> inStockIngredients = [];
+  int? id;
 
   Future<void> initializeProvider() async {
     // initialize local storage
@@ -13,15 +15,26 @@ class IngredientsProvider extends ChangeNotifier {
 
   Future<void> addItem({required String item}) async {
     // even though this is a local query, use ViewState to allow for possible future use of remote storage
+    setViewState(ViewState.busy);
 
-    // add the item to the list
+    // create a new ingredient model
+    Ingredient ingredient = Ingredient()
+      ..onHand = true
+      ..amount = 0.0
+      ..id = id ?? -1
+      ..name = item;
 
-    // update local storage
+    // update the local storage
+    inStockIngredients.add(ingredient);
 
-    inStockIngredients.add(item);
-    Set<String> tempSet = inStockIngredients.toSet();
+    // ensure there are no duplicates
+    Set<Ingredient> tempSet = inStockIngredients.toSet();
     inStockIngredients = tempSet.toList();
-    inStockIngredients.sort();
+
+    // sort the list
+    inStockIngredients.sort((a, b) => a.name!.compareTo(b.name!));
+
+    // update the view by setting view state to idle
     setViewState(ViewState.idle);
   }
 

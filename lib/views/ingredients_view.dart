@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
+import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/viewmodel/ingredients_provider.dart';
 import 'package:recipe_management/views/menu_view.dart';
@@ -49,11 +50,6 @@ class IngredientsView extends StatelessWidget {
                           ],
                         ),
                         Expanded(child: ingredientsList(provider: provider))
-                        // Consumer<IngredientsProvider>(builder: (_, provider, __) {
-                        //   return provider.state == ViewState.idle
-                        //       ? Expanded(child: ingredientsList(provider: provider))
-                        //       : CircularProgressIndicator();
-                        // })
                       ],
                     ),
                   )
@@ -67,10 +63,10 @@ class IngredientsView extends StatelessWidget {
   Widget ingredientsList({required IngredientsProvider provider}) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        String ingredient = provider.inStockIngredients[index];
+        Ingredient ingredient = provider.inStockIngredients[index];
         return ListTile(
           title: Text(
-            ingredient,
+            ingredient.name ?? '',
             style: TextStyle(fontSize: 16, color: Colors.black), // Example styles
           ),
         );
