@@ -19,7 +19,9 @@ class IngredientsProvider extends ChangeNotifier {
     // update local storage
 
     inStockIngredients.add(item);
-
+    Set<String> tempSet = inStockIngredients.toSet();
+    inStockIngredients = tempSet.toList();
+    inStockIngredients.sort();
     setViewState(ViewState.idle);
   }
 

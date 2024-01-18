@@ -39,11 +39,11 @@ class AppFacade implements IAppFacade {
     return localRepository.fetchIngredients();
   }
 
-  Future<void> addIngredient({required String ingredient}) async {
-    localRepository.addIngredient(item: ingredient);
+  Future<void> addIngredient({required String itemId, required String ingredient}) async {
+    localRepository.addItem(itemId: itemId, item: ingredient);
   }
 
-  Future<void> removeIngredient({required String ingredient}) async {
-    localRepository.removeIngredient(item: ingredient);
+  Future<void> removeIngredient({required String itemId}) async {
+    localRepository.removeItem(itemId: itemId);
   }
 }

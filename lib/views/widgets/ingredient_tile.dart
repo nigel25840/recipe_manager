@@ -22,7 +22,6 @@ class IngredientTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(child: Text(ingredient.name ?? '', style: AppConstants.kTextStyleDefault)),
-              // Text(recipe.),
             ],
           ),
         ),

@@ -19,38 +19,46 @@ class IngredientsView extends StatelessWidget {
           title: Text('Recipe Manager'),
           backgroundColor: Colors.green,
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Text('Ingredients View', style: AppConstants.kTextStyleDefault),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _itemEntryController,
-                      decoration: InputDecoration(
-                        labelText: 'Enter text',
-                      ),
+        body: Consumer<IngredientsProvider>(
+          builder: (_, provider, __) {
+            return provider.state == ViewState.idle
+                ? Center(
+                    child: Column(
+                      children: [
+                        Text('Ingredients View', style: AppConstants.kTextStyleDefault),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _itemEntryController,
+                                decoration: InputDecoration(
+                                  labelText: 'Enter text',
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 8), // Add some spacing between TextField and button
+                            ElevatedButton(
+                              onPressed: () {
+                                // Handle button press
+                                print(_itemEntryController.text);
+                                provider.addItem(item: _itemEntryController.text);
+                                _itemEntryController.clear();
+                              },
+                              child: Text('Add'),
+                            ),
+                          ],
+                        ),
+                        Expanded(child: ingredientsList(provider: provider))
+                        // Consumer<IngredientsProvider>(builder: (_, provider, __) {
+                        //   return provider.state == ViewState.idle
+                        //       ? Expanded(child: ingredientsList(provider: provider))
+                        //       : CircularProgressIndicator();
+                        // })
+                      ],
                     ),
-                  ),
-                  SizedBox(width: 8), // Add some spacing between TextField and button
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle button press
-                      // You can access the text from _itemEntryController.text here
-                    },
-                    child: Text('Add'),
-                  ),
-                ],
-              ),
-              Consumer<IngredientsProvider>(builder: (_, provider, __) {
-                return provider.state == ViewState.idle
-                    ? Expanded(child: ingredientsList(provider: provider))
-                    : CircularProgressIndicator();
-              })
-            ],
-          )
-          ,
+                  )
+                : CircularProgressIndicator();
+          },
         ),
       ),
     );
