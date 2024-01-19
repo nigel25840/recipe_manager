@@ -52,9 +52,8 @@ class PantryProvider extends ChangeNotifier {
 
   Future<void> deleteItem({required String item}) async {
     // delete the item from local storage
-    if(inStockIngredients.contains(item)) {
-      inStockIngredients.remove(item);
-    }
+    await appFacade.deleteIngredient(ingredientName: item);
+    await fetchIngredients();
     setViewState(ViewState.idle);
   }
 

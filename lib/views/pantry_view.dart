@@ -80,20 +80,49 @@ class PantryView extends StatelessWidget {
   }
 
   Widget ingredientsList({required PantryProvider provider}) {
-    return ListView.separated(
+    return ListView.builder(
+      itemCount: provider.inStockIngredients.length,
       itemBuilder: (context, index) {
         Ingredient ingredient = provider.inStockIngredients[index];
-        return ListTile(
-          title: Text(
-            ingredient.name ?? '',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+        return Dismissible(
+          key: Key(ingredient.name!), // Use a unique key for each item
+          onDismissed: (direction) {
+            // Remove the item from the data source
+            provider.deleteItem(item: ingredient.name!);
+            // Show a snack bar or perform any other action
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${ingredient.name} dismissed'),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    // Undo the dismissal
+                    // provider.undoRemoveIngredient();
+                  },
+                ),
+              ),
+            );
+          },
+          background: Container(
+            color: Colors.red, // Background color when swiping
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ),
+          child: ListTile(
+            title: Text(
+              ingredient.name ?? '',
+              style: TextStyle(fontSize: 16, color: Colors.black),
+            ),
           ),
         );
       },
-      separatorBuilder: (context, index) => Divider(height: 0, color: Colors.blue),
-      itemCount: provider.inStockIngredients.length,
     );
   }
+
 }
 
 

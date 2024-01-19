@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:conduit_codable/conduit_codable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +43,13 @@ class LocalRepository {
   }
 
   static Future<void> removeIngredient({required String ingredientName}) async {
-
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    Set<String> allKeys = await preferences.getKeys();
+    for(String key in allKeys){
+      if(key == ingredientName) {
+        preferences.remove(key);
+        break;
+      }
+    }
   }
 }

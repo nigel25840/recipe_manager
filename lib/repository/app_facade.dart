@@ -11,6 +11,7 @@ abstract class IAppFacade {
   Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List? ingredients});
   Future<List<Ingredient>> fetchIngredients();
   Future<void> addIngredient({required Ingredient ingredient});
+  Future<void> deleteIngredient({required String ingredientName});
 }
 
 class AppFacade implements IAppFacade {
@@ -39,11 +40,13 @@ class AppFacade implements IAppFacade {
     return await LocalRepository.fetchIngredients();
   }
 
+  @override
   Future<void> addIngredient({required Ingredient ingredient}) async {
     await LocalRepository.addIngredient(ingredient: ingredient);
   }
 
-  Future<void> removeIngredient({required String ingredientName}) async {
-    await LocalRepository.removeIngredient(ingredientName: ingredientName);
+  @override
+  Future<void> deleteIngredient({required String ingredientName}) async {
+    LocalRepository.removeIngredient(ingredientName: ingredientName);
   }
 }

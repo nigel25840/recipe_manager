@@ -12,4 +12,6 @@ Add RouteSettings file and use an app router to manage navigation routes. This w
 
 Add Mockoon to replace mocks for widget testing
 
+Add pull-to-refresh on recipes view
+
 Add a more robust NoSQL persistence solution such as Hive
