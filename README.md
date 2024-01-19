@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## About this project
 AppFacade serves as a data source for both local and remote data. 
-Behind AppFacade is LocalRepository and APIRepository. This makes us to easily switch out local and remote data sources
+Behind AppFacade is LocalRepository and APIRepository. This makes it easy switch out local and remote data sources
 
 
 ## With more time
