@@ -18,11 +18,15 @@ class ApiRepository<T extends Coding> {
   final Map<String, String> headers = {"Content-Type": "application/json"};
 
   Future<Either<Exception, List<T>>> fetchAll({List<String>? searchTerms}) async {
-    String urlString =
-        'https://api.spoonacular.com/recipes/findByIngredients?ingredients=eggs,+walnuts,+sugar,+cranberries&number=5&apiKey=9cdd0725f3a1411fae547fba718cce83';
-    Uri url = Uri.parse(urlString);
-    Response response = await client.get(url, headers: headers);
 
+    String baseUrl = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=';
+    String urlParams = searchTerms != null ? searchTerms.join(',+') : '';
+    String apiKey = '9cdd0725f3a1411fae547fba718cce83';
+    int numberOfResults = 10;
+    String urlString = '${baseUrl}${urlParams}&number=${numberOfResults}&apiKey=${apiKey}';
+    Uri url = Uri.parse(urlString);
+
+    Response response = await client.get(url, headers: headers);
     if (response.statusCode == 200) {
       final decodedMap = json.decode(response.body);
       List<T> items = decodedMap.map<T>((e) {

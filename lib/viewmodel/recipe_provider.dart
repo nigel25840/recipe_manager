@@ -28,7 +28,7 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> getAllRecipes({List<String>? ingredients}) async {
     setViewState(ViewState.busy);
-    final response = await appFacade.fetchRecipes<Recipe>();
+    final response = await appFacade.fetchRecipes<Recipe>(ingredients: ingredients);
     response?.fold((failure) {
       _onError?.call(AppConstants.kServerError);
     }, (success) => allRecipes = success);

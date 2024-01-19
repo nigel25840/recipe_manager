@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_management/dependencies.dart';
+import 'package:recipe_management/viewmodel/pantry_provider.dart';
+import 'package:recipe_management/viewmodel/recipe_provider.dart';
 import 'views/main_recipes_view.dart';
 
 void main() async {
@@ -8,18 +11,31 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => RecipeProvider(
+                  errorCallback: (String message) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(message),
+                    ));
+                  },
+                )..initializeProvider()),
+        ChangeNotifierProvider(create: (_) => PantryProvider()..initializeProvider())
+        // Add more providers as needed
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: MainRecipesView(title: 'Flutter Demo Home Page'),
       ),
-      home: MainRecipesView(title: 'Flutter Demo Home Page'),
     );
   }
 }

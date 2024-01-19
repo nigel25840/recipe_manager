@@ -14,15 +14,7 @@ class MainRecipesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => RecipeProvider(
-        errorCallback: (String message) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(message),
-          ));
-        },
-      )..initializeProvider(),
-      child: Scaffold(
+    return Scaffold(
         endDrawer: MenuDrawer(),
         appBar: AppBar(
           title: Text('Recipe Manager'),
@@ -37,12 +29,10 @@ class MainRecipesView extends StatelessWidget {
             },
           ),
         ),
-      ),
-    );
+      );
   }
 
   Widget recipeList({required RecipeProvider provider}) {
-    // return RecipeTile(recipe: provider.allRecipes[0]);
     return ListView.separated(
         itemBuilder: (context, index) {
           Recipe recipe = provider.allRecipes[index];

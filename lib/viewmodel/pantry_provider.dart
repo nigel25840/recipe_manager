@@ -14,10 +14,10 @@ class PantryProvider extends ChangeNotifier {
     await fetchIngredients();
   }
 
-  Future<void> doRecipeSearch() async {
-    List<String> searchTerms = selectedIngredients.map((ingredient) => ingredient.name ?? '').toList();
-    await appFacade.fetchRecipes(ingredients: searchTerms);
-  }
+  // Future<void> doRecipeSearch() async {
+  //   List<String> searchTerms = selectedIngredients.map((ingredient) => ingredient.name ?? '').toList();
+  //   await appFacade.fetchRecipes(ingredients: searchTerms);
+  // }
 
   void toggleSelection(Ingredient ingredient) {
     if (selectedIngredients.contains(ingredient)) {
