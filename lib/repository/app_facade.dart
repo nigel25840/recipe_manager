@@ -8,7 +8,7 @@ import 'package:recipe_management/repository/local_repository.dart';
 import '../model/recipe_model.dart';
 
 abstract class IAppFacade {
-  Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List? ingredients});
+  Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List<String>? ingredients});
   Future<List<Ingredient>> fetchIngredients();
   Future<void> addIngredient({required Ingredient ingredient});
   Future<void> deleteIngredient({required String ingredientName});
@@ -19,7 +19,7 @@ class AppFacade implements IAppFacade {
 
   @override
   // fetches all recipes, both remote and local
-  Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List? ingredients}) async {
+  Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List<String>? ingredients}) async {
     apiRepository = ApiRepository<Recipe>(Recipe.new);
 
     // then perform an API call to fetch remote recipes matching the ingredients

@@ -14,6 +14,19 @@ class PantryProvider extends ChangeNotifier {
     await fetchIngredients();
   }
 
+  Future<void> doRecipeSearch({required List<String> searchTerms}) async {
+
+  }
+
+  void toggleSelection(Ingredient ingredient) {
+    if (selectedIngredients.contains(ingredient)) {
+      selectedIngredients.remove(ingredient);
+    } else {
+      selectedIngredients.add(ingredient);
+    }
+    setViewState(ViewState.idle);
+  }
+
   Future<void> fetchIngredients() async {
     // set view state
     setViewState(ViewState.busy);

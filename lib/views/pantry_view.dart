@@ -127,7 +127,7 @@ class PantryView extends StatelessWidget {
             leading: Checkbox(
               value: isSelected,
               onChanged: (value) {
-                // provider.toggleSelection(ingredient);
+                provider.toggleSelection(ingredient);
               },
             ),
           ),
