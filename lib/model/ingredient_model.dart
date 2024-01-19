@@ -1,7 +1,10 @@
 import 'package:conduit_codable/conduit_codable.dart';
 
+// for the purpose of this project, duplicates are not allowed by the provider
+// thus, the name of the ingredient can be used as a unique id. For real world
+// apps, this would not be the case and an actual unique id would be preferred
+
 class Ingredient extends Coding {
-  int? id;
   String? aisle;
   String? image;
   String? name;
@@ -11,7 +14,6 @@ class Ingredient extends Coding {
   @override
   void decode(KeyedArchive object) {
     super.decode(object);
-    id = object.decode('id');
     aisle = object.decode('aisle');
     image = object.decode('image');
     name = object.decode('name');
@@ -21,17 +23,15 @@ class Ingredient extends Coding {
 
   @override
   void encode(KeyedArchive object) {
-    object.encode('id', id);
     object.encode('aisle', aisle);
     object.encode('image', image);
     object.encode('name', name);
     object.encode('amount', amount);
     object.encode('onHand', onHand);
-
-    print(object.toString());
   }
 
   // override the == operator and hashcode so that a set can be used to remove duplicate entries
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

@@ -9,7 +9,7 @@ import '../model/recipe_model.dart';
 
 abstract class IAppFacade {
   Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List? ingredients});
-  Future<List<String>> fetchIngredients();
+  Future<List<Ingredient>> fetchIngredients();
   Future<void> addIngredient({required Ingredient ingredient});
 }
 
@@ -35,15 +35,15 @@ class AppFacade implements IAppFacade {
   }
 
   @override
-  Future<List<String>> fetchIngredients() async {
-    return LocalRepository.fetchIngredients();
+  Future<List<Ingredient>> fetchIngredients() async {
+    return await LocalRepository.fetchIngredients();
   }
 
   Future<void> addIngredient({required Ingredient ingredient}) async {
     await LocalRepository.addIngredient(ingredient: ingredient);
   }
 
-  Future<void> removeIngredient({required int itemId}) async {
-    await LocalRepository.removeIngredient(ingredientId: itemId);
+  Future<void> removeIngredient({required String ingredientName}) async {
+    await LocalRepository.removeIngredient(ingredientName: ingredientName);
   }
 }

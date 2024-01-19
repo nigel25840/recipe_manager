@@ -7,13 +7,16 @@ import 'package:get_it/get_it.dart';
 class PantryProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
   List<Ingredient> inStockIngredients = [];
-  int id = -1;
   IAppFacade appFacade = GetIt.instance<IAppFacade>();
 
   Future<void> initializeProvider() async {
-    // initialize local storage
-
+    // set view state
+    setViewState(ViewState.busy);
     // query local storage using AppFacade
+    inStockIngredients = await appFacade.fetchIngredients();
+    inStockIngredients.sort((a, b) => a.name!.compareTo(b.name!));
+    // finish up by setting view state again
+    setViewState(ViewState.idle);
   }
 
   Future<void> addItem({required String item}) async {
@@ -24,7 +27,6 @@ class PantryProvider extends ChangeNotifier {
     Ingredient ingredient = Ingredient()
       ..onHand = true
       ..amount = 0.0
-      ..id = id
       ..name = item;
 
     // update the local storage
