@@ -17,7 +17,11 @@ class AppConstants {
 
   // UI styles
   static const kDefaultDivider = Divider(
-    height: 25,
+    height: 10,
     color: Colors.blue,
+  );
+  static const kGroceryListDivider = Divider(
+    height: 10,
+    color: Colors.black26,
   );
 }

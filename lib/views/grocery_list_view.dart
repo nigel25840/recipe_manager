@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
-import 'package:recipe_management/views/widgets/ingredient_tile.dart';
+import 'package:recipe_management/views/widgets/grocery_item_tile.dart';
 
 class GroceryListView extends StatelessWidget {
   const GroceryListView({super.key, required this.recipe});
@@ -11,24 +11,41 @@ class GroceryListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        endDrawer: MenuDrawer(),
-        appBar: AppBar(
-          title: Text('Grocery List'),
-          backgroundColor: Colors.green,
+      endDrawer: MenuDrawer(),
+      appBar: AppBar(
+        title: Text('Grocery List'),
+        backgroundColor: Colors.green,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Items highlighted in green are in stock', // Add your text above the ListView
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Divider(height: 1, color: Colors.transparent),
+            ), // Add some spacing between text and ListView
+            _groceryListView(context, recipe: recipe),
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _groceryListView(context, recipe: recipe),
-        ));
+      ),
+    );
   }
 
   Widget _groceryListView(BuildContext context, {required Recipe recipe}) {
-    return ListView.separated(
-      itemBuilder: (context, index) {
-        return IngredientTile(ingredient: recipe.ingredients[index]);
-      },
-      separatorBuilder: (context, index) => AppConstants.kDefaultDivider,
-      itemCount: recipe.ingredients.length,
+    return Expanded(
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          return GroceryItemTile(ingredient: recipe.ingredients[index]);
+        },
+        separatorBuilder: (context, index) => AppConstants.kGroceryListDivider,
+        itemCount: recipe.ingredients.length,
+      ),
     );
   }
 }
+

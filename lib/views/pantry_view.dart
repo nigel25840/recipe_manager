@@ -90,7 +90,7 @@ class PantryView extends StatelessWidget {
           ),
         );
       },
-      separatorBuilder: (context, index) => Divider(height: 25, color: Colors.blue),
+      separatorBuilder: (context, index) => Divider(height: 0, color: Colors.blue),
       itemCount: provider.inStockIngredients.length,
     );
   }
