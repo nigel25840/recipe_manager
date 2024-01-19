@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
-import 'package:recipe_management/viewmodel/pantry_provider.dart';
-import 'package:recipe_management/viewmodel/recipe_provider.dart';
+import 'package:recipe_management/view_model/pantry_provider.dart';
+import 'package:recipe_management/view_model/recipe_provider.dart';
+import 'package:recipe_management/views/main_recipes_view.dart';
 import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
 
 class PantryView extends StatelessWidget {
@@ -22,7 +23,15 @@ class PantryView extends StatelessWidget {
                 // provider.doRecipeSearch();
                 List<String> selections =
                     provider.selectedIngredients.map((ingredient) => ingredient.name ?? '').toList();
+
+                // TODO: this should be replaced with an alert dialog informing the user to select some ingredients
+                if(selections.isEmpty) return;
+
                 Provider.of<RecipeProvider>(context, listen: false).getAllRecipes(ingredients: selections);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainRecipesView()),
+                );
               },
               child: Icon(Icons.search),
               backgroundColor: Colors.green,
@@ -63,7 +72,7 @@ class PantryView extends StatelessWidget {
                               SizedBox(width: 8),
                               ElevatedButton(
                                 onPressed: () {
-                                  print(_itemEntryController.text);
+                                  if(_itemEntryController.text.isEmpty) return;
                                   provider.addItem(item: _itemEntryController.text);
                                   provider.fetchIngredients();
                                   _itemEntryController.clear();

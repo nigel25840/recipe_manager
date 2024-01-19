@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/dependencies.dart';
-import 'package:recipe_management/viewmodel/pantry_provider.dart';
-import 'package:recipe_management/viewmodel/recipe_provider.dart';
+import 'package:recipe_management/view_model/pantry_provider.dart';
+import 'package:recipe_management/view_model/recipe_provider.dart';
 import 'views/main_recipes_view.dart';
 
 void main() async {
