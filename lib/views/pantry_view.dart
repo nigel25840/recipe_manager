@@ -3,24 +3,24 @@ import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
-import 'package:recipe_management/viewmodel/ingredients_provider.dart';
-import 'package:recipe_management/views/menu_view.dart';
+import 'package:recipe_management/viewmodel/pantry_provider.dart';
+import 'package:recipe_management/views/menu_drawer_view.dart';
 
-class IngredientsView extends StatelessWidget {
-  IngredientsView({super.key});
+class PantryView extends StatelessWidget {
+  PantryView({super.key});
   final TextEditingController _itemEntryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => IngredientsProvider()..initializeProvider(),
+      create: (_) => PantryProvider()..initializeProvider(),
       child: Scaffold(
         endDrawer: MenuDrawer(),
         appBar: AppBar(
-          title: Text('Recipe Manager'),
+          title: Text('My Pantry'),
           backgroundColor: Colors.green,
         ),
-        body: Consumer<IngredientsProvider>(
+        body: Consumer<PantryProvider>(
           builder: (_, provider, __) {
             return provider.state == ViewState.idle
                 ? Center(
@@ -60,7 +60,7 @@ class IngredientsView extends StatelessWidget {
     );
   }
 
-  Widget ingredientsList({required IngredientsProvider provider}) {
+  Widget ingredientsList({required PantryProvider provider}) {
     return ListView.separated(
       itemBuilder: (context, index) {
         Ingredient ingredient = provider.inStockIngredients[index];

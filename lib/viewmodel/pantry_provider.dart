@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
+import 'package:recipe_management/repository/app_facade.dart';
+import 'package:get_it/get_it.dart';
 
-class IngredientsProvider extends ChangeNotifier {
+class PantryProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
   List<Ingredient> inStockIngredients = [];
-  int? id;
+  int id = -1;
+  IAppFacade appFacade = GetIt.instance<IAppFacade>();
 
   Future<void> initializeProvider() async {
     // initialize local storage
@@ -21,11 +24,12 @@ class IngredientsProvider extends ChangeNotifier {
     Ingredient ingredient = Ingredient()
       ..onHand = true
       ..amount = 0.0
-      ..id = id ?? -1
+      ..id = id
       ..name = item;
 
     // update the local storage
-    inStockIngredients.add(ingredient);
+    // inStockIngredients.add(ingredient);
+    appFacade.addIngredient(ingredient: ingredient);
 
     // ensure there are no duplicates
     Set<Ingredient> tempSet = inStockIngredients.toSet();

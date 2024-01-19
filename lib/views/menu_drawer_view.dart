@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_management/views/ingredients_view.dart';
+import 'package:recipe_management/views/pantry_view.dart';
 import 'package:recipe_management/views/main_recipes_view.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -19,8 +19,8 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Ingredients'),
-            onTap: () => _navigate(context, MaterialPageRoute(builder: (context) => IngredientsView())),
+            title: Text('Pantry'),
+            onTap: () => _navigate(context, MaterialPageRoute(builder: (context) => PantryView())),
           ),
           ListTile(
             title: Text('Recipes'),

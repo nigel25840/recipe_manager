@@ -1,29 +1,23 @@
-import 'package:localstorage/localstorage.dart';
+import 'dart:convert';
+import 'package:conduit_codable/conduit_codable.dart';
+import 'package:recipe_management/model/ingredient_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalRepository {
-  late LocalStorage storage;
+  static const String key = 'pantry_data_key';
 
-  Future<List<String>> fetchIngredients() {
+  static Future<List<String>> fetchIngredients() {
     return Future.value([]);
   }
 
-  Future<void> initializeDataStore() async {
-    if (!(await storage.ready)) {
-      storage = LocalStorage('recipe_app.json');
-    }
+  static Future<void> addIngredient({required Ingredient ingredient}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final archive = KeyedArchive.archive(ingredient);
+    final serializedIngredient = json.encode(archive);
+    print(serializedIngredient);
   }
 
-  Future<void> addItem({required String itemId, required dynamic item}) async {
-    await initializeDataStore();
-    if (storage.getItem(itemId) == null) {
-      storage.setItem(itemId, item);
-    }
-  }
+  static Future<void> removeIngredient({required int ingredientId}) async {
 
-  Future<void> removeItem({required String itemId}) async {
-    await initializeDataStore();
-    if (storage.getItem(itemId) == null) {
-      storage.deleteItem(itemId);
-    }
   }
 }

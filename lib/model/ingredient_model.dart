@@ -1,7 +1,4 @@
 import 'package:conduit_codable/conduit_codable.dart';
-import 'package:get_it/get_it.dart';
-import 'package:recipe_management/repository/app_facade.dart';
-import '../repository/app_facade.dart';
 
 class Ingredient extends Coding {
   int? id;
@@ -10,17 +7,6 @@ class Ingredient extends Coding {
   String? name;
   double? amount;
   bool onHand = false;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Ingredient &&
-        runtimeType == other.runtimeType &&
-        name == other.name;
-  }
-
-  @override
-  int get hashCode => name.hashCode ?? 0;
 
   @override
   void decode(KeyedArchive object) {
@@ -44,4 +30,16 @@ class Ingredient extends Coding {
 
     print(object.toString());
   }
+
+  // override the == operator and hashcode so that a set can be used to remove duplicate entries
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Ingredient &&
+        runtimeType == other.runtimeType &&
+        name == other.name;
+  }
+
+  @override
+  int get hashCode => name.hashCode ?? 0;
 }
