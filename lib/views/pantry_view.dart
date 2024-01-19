@@ -17,25 +17,15 @@ class PantryView extends StatelessWidget {
       create: (_) => PantryProvider()..initializeProvider(),
       child: Scaffold(
         endDrawer: MenuDrawer(),
-          appBar: AppBar(
-            title: Text('Recipe Manager'),
-            backgroundColor: Colors.green,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  // Handle the plus button tap
-                  _showAddItemDialog(context);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              ),
-            ],
-          ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.search),
+          backgroundColor: Colors.green,
+        ),
+        appBar: AppBar(
+          title: Text('My Pantry'),
+          backgroundColor: Colors.green,
+        ),
         body: Consumer<PantryProvider>(
           builder: (_, provider, __) {
             return provider.state == ViewState.idle
@@ -99,6 +89,8 @@ class PantryView extends StatelessWidget {
       itemCount: provider.inStockIngredients.length,
       itemBuilder: (context, index) {
         Ingredient ingredient = provider.inStockIngredients[index];
+        bool isSelected = provider.selectedIngredients.contains(ingredient);
+
         return Dismissible(
           key: Key(ingredient.name!), // Use a unique key for each item
           onDismissed: (direction) {
@@ -107,7 +99,7 @@ class PantryView extends StatelessWidget {
             // Show a snack bar or perform any other action
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('${ingredient.name} removed from ingredients'),
+                content: Text('${ingredient.name} dismissed'),
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {
@@ -132,49 +124,19 @@ class PantryView extends StatelessWidget {
               ingredient.name ?? '',
               style: TextStyle(fontSize: 16, color: Colors.black),
             ),
+            leading: Checkbox(
+              value: isSelected,
+              onChanged: (value) {
+                // provider.toggleSelection(ingredient);
+              },
+            ),
           ),
         );
       },
     );
   }
 
-  // Function to show the add item dialog
-  Future<void> _showAddItemDialog(BuildContext context) async {
-    String newItem = ''; // Initialize an empty string
 
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Add Item'),
-          content: TextField(
-            onChanged: (value) {
-              newItem = value;
-            },
-            decoration: InputDecoration(
-              hintText: 'Enter item name',
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Send the value to the PantryProvider and close the dialog
-                Provider.of<PantryProvider>(context, listen: false).addItem(item: newItem);
-                Navigator.of(context).pop();
-              },
-              child: Text('Add'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
 

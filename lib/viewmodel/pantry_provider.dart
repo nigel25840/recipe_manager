@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 class PantryProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
   List<Ingredient> inStockIngredients = [];
+  List<Ingredient> selectedIngredients = [];
   IAppFacade appFacade = GetIt.instance<IAppFacade>();
 
   Future<void> initializeProvider() async {
