@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
+import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/view_model/pantry_provider.dart';
 import 'package:recipe_management/view_model/recipe_provider.dart';
 import 'package:recipe_management/views/main_recipes_view.dart';
@@ -37,7 +38,7 @@ class PantryView extends StatelessWidget {
               backgroundColor: Colors.green,
             ),
             appBar: AppBar(
-              title: Text('My Pantry'),
+              title: Text(AppConstants.kPantryTitle),
               backgroundColor: Colors.green,
             ),
             body: provider.state == ViewState.idle

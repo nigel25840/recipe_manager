@@ -22,8 +22,8 @@ class GroceryListView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Items highlighted in green are in stock', // Add your text above the ListView
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              AppConstants.kGroceryMessage, // Add your text above the ListView
+              style: AppConstants.kTextStyleMessage,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30),
