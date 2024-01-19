@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
-import 'package:recipe_management/views/menu_drawer_view.dart';
+import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
 import 'package:recipe_management/views/widgets/ingredient_tile.dart';
 
 class GroceryListView extends StatelessWidget {

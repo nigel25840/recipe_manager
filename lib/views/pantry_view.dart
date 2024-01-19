@@ -4,10 +4,11 @@ import 'package:recipe_management/globals.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/viewmodel/pantry_provider.dart';
-import 'package:recipe_management/views/menu_drawer_view.dart';
+import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
 
 class PantryView extends StatelessWidget {
-  PantryView({super.key});
+  PantryView({Key? key}) : super(key: key);
+
   final TextEditingController _itemEntryController = TextEditingController();
 
   @override
@@ -24,35 +25,53 @@ class PantryView extends StatelessWidget {
           builder: (_, provider, __) {
             return provider.state == ViewState.idle
                 ? Center(
-                    child: Column(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Text('Ingredients View', style: AppConstants.kTextStyleDefault),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: _itemEntryController,
-                                decoration: InputDecoration(
-                                  labelText: 'Enter text',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: _itemEntryController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(16.0),
+                                hintText: 'Enter text here',
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.blue,
+                                    width: 2.0,
+                                  ),
                                 ),
                               ),
                             ),
-                            SizedBox(width: 8), // Add some spacing between TextField and button
-                            ElevatedButton(
-                              onPressed: () {
-                                // Handle button press
-                                print(_itemEntryController.text);
-                                provider.addItem(item: _itemEntryController.text);
-                                _itemEntryController.clear();
-                              },
-                              child: Text('Add'),
-                            ),
-                          ],
+                          ),
                         ),
-                        Expanded(child: ingredientsList(provider: provider))
+                        SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                            print(_itemEntryController.text);
+                            provider.addItem(item: _itemEntryController.text);
+                            provider.fetchIngredients();
+                            _itemEntryController.clear();
+                          },
+                          child: Text('Add'),
+                        ),
                       ],
                     ),
-                  )
+                    SizedBox(height: 8),
+                    Expanded(
+                      child: ingredientsList(provider: provider),
+                    ),
+                  ],
+                ),
+              ),
+            )
                 : CircularProgressIndicator();
           },
         ),
@@ -67,7 +86,7 @@ class PantryView extends StatelessWidget {
         return ListTile(
           title: Text(
             ingredient.name ?? '',
-            style: TextStyle(fontSize: 16, color: Colors.black), // Example styles
+            style: TextStyle(fontSize: 16, color: Colors.black),
           ),
         );
       },
@@ -76,3 +95,5 @@ class PantryView extends StatelessWidget {
     );
   }
 }
+
+

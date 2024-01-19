@@ -5,7 +5,7 @@ import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/viewmodel/recipe_provider.dart';
 import 'package:recipe_management/views/grocery_list_view.dart';
-import 'package:recipe_management/views/menu_drawer_view.dart';
+import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
 import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
 class MainRecipesView extends StatelessWidget {

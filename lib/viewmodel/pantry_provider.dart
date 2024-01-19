@@ -10,11 +10,17 @@ class PantryProvider extends ChangeNotifier {
   IAppFacade appFacade = GetIt.instance<IAppFacade>();
 
   Future<void> initializeProvider() async {
+    await fetchIngredients();
+  }
+
+  Future<void> fetchIngredients() async {
     // set view state
     setViewState(ViewState.busy);
+
     // query local storage using AppFacade
     inStockIngredients = await appFacade.fetchIngredients();
     inStockIngredients.sort((a, b) => a.name!.compareTo(b.name!));
+
     // finish up by setting view state again
     setViewState(ViewState.idle);
   }
