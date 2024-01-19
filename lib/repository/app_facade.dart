@@ -23,7 +23,7 @@ class AppFacade implements IAppFacade {
     apiRepository = ApiRepository<Recipe>(Recipe.new);
 
     // then perform an API call to fetch remote recipes matching the ingredients
-    Either<Exception, List<Coding>> eitherResponse = await apiRepository.fetchAll();
+    Either<Exception, List<Coding>> eitherResponse = await apiRepository.fetchAll(searchTerms: ingredients);
     return await eitherResponse.fold(
         (exception) async {
           return left(ServerFailure(code: 400, message: 'The request failed'));
