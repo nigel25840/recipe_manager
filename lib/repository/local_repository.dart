@@ -45,10 +45,12 @@ class LocalRepository {
   static Future<void> removeIngredient({required String ingredientName}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     Set<String> allKeys = await preferences.getKeys();
-    for(String key in allKeys){
-      if(key == ingredientName) {
-        preferences.remove(key);
-        break;
+    if (allKeys.isNotEmpty) {
+      for(String key in allKeys){
+        if(key == ingredientName) {
+          preferences.remove(key);
+          break;
+        }
       }
     }
   }
