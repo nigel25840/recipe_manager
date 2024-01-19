@@ -17,10 +17,25 @@ class PantryView extends StatelessWidget {
       create: (_) => PantryProvider()..initializeProvider(),
       child: Scaffold(
         endDrawer: MenuDrawer(),
-        appBar: AppBar(
-          title: Text('My Pantry'),
-          backgroundColor: Colors.green,
-        ),
+          appBar: AppBar(
+            title: Text('Recipe Manager'),
+            backgroundColor: Colors.green,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  // Handle the plus button tap
+                  _showAddItemDialog(context);
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              ),
+            ],
+          ),
         body: Consumer<PantryProvider>(
           builder: (_, provider, __) {
             return provider.state == ViewState.idle
@@ -92,7 +107,7 @@ class PantryView extends StatelessWidget {
             // Show a snack bar or perform any other action
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('${ingredient.name} dismissed'),
+                content: Text('${ingredient.name} removed from ingredients'),
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {
@@ -123,6 +138,43 @@ class PantryView extends StatelessWidget {
     );
   }
 
+  // Function to show the add item dialog
+  Future<void> _showAddItemDialog(BuildContext context) async {
+    String newItem = ''; // Initialize an empty string
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add Item'),
+          content: TextField(
+            onChanged: (value) {
+              newItem = value;
+            },
+            decoration: InputDecoration(
+              hintText: 'Enter item name',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Send the value to the PantryProvider and close the dialog
+                Provider.of<PantryProvider>(context, listen: false).addItem(item: newItem);
+                Navigator.of(context).pop();
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 
