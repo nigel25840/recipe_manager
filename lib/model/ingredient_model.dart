@@ -11,6 +11,30 @@ class Ingredient extends Coding {
   double? amount;
   bool onHand = false;
 
+  Ingredient({
+    this.aisle,
+    this.image,
+    this.name,
+    this.amount,
+    this.onHand = false,
+  });
+
+  Ingredient copyWith({
+    String? aisle,
+    String? image,
+    String? name,
+    double? amount,
+    bool? onHand,
+  }) {
+    return Ingredient(
+      aisle: aisle ?? this.aisle,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      amount: amount ?? this.amount,
+      onHand: onHand ?? this.onHand,
+    );
+  }
+
   @override
   void decode(KeyedArchive object) {
     super.decode(object);

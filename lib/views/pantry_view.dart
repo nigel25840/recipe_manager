@@ -20,6 +20,7 @@ class PantryView extends StatelessWidget {
         return Scaffold(
             endDrawer: MenuDrawer(),
             floatingActionButton: FloatingActionButton(
+              key: AppConstants.keySearchRecipesButton,
               onPressed: () {
                 // provider.doRecipeSearch();
                 List<String> selections =
@@ -53,6 +54,7 @@ class PantryView extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextField(
+                                    key: AppConstants.keyAddIngredientText,
                                     controller: _itemEntryController,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(16.0),
@@ -72,6 +74,7 @@ class PantryView extends StatelessWidget {
                               ),
                               SizedBox(width: 8),
                               ElevatedButton(
+                                key: AppConstants.keyAddButton,
                                 onPressed: () {
                                   if(_itemEntryController.text.isEmpty) return;
                                   provider.addItem(item: _itemEntryController.text);

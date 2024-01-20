@@ -35,7 +35,9 @@ class AppConstants {
   );
 
   // UI keys
-  static const Key keyRecipeListView = Key('recipe_list');
-  static const Key keyNoRecipesView = Key('no_recipes_available');
-
+  static const Key keyAddIngredientText = Key('9aee93df-7677-48a4-95bb-0dd012372efd');
+  static const Key keyRecipeListView = Key('ad87edb9-1c2c-47aa-83b9-51d14154d45a');
+  static const Key keyNoRecipesView = Key('37e60294-69f7-4e8e-a6a6-f3094782d1a4');
+  static const Key keyAddButton = Key('bd44bc1a-3d66-4d92-aca7-7c1e533f2025');
+  static const Key keySearchRecipesButton = Key('eb5debe9-687e-46fd-93c6-2cc8adeed17e');
 }

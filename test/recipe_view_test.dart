@@ -12,11 +12,13 @@ import 'shared_mocks.dart';
 void main() async {
   setUp(() {
     if(!GetIt.instance.isRegistered<IAppFacade>()) {
-      GetIt.instance.registerLazySingleton<IAppFacade>(MockAppFacade.new);
+      GetIt.instance.registerLazySingleton<IAppFacade>(() => MockAppFacade.new());
     }
   });
 
-  tearDown(() {});
+  tearDown(() {
+    GetIt.instance.unregister<IAppFacade>();
+  });
 
   Widget widgetInTest() {
     return ChangeNotifierProvider(
