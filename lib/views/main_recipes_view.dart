@@ -35,6 +35,7 @@ class MainRecipesView extends StatelessWidget {
   Widget recipeList({required RecipeProvider provider}) {
     return provider.allRecipes.isNotEmpty
         ? ListView.separated(
+            key: AppConstants.keyRecipeListView,
             itemBuilder: (context, index) {
               Recipe recipe = provider.allRecipes[index];
               return GestureDetector(
@@ -52,21 +53,25 @@ class MainRecipesView extends StatelessWidget {
             separatorBuilder: (context, index) => AppConstants.kDefaultDivider,
             itemCount: provider.allRecipes.length,
           )
-        : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppConstants.kWelcomeMessage,
-                style: AppConstants.kTextStyleMessage,
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            key: AppConstants.keyNoRecipesView,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  AppConstants.kWelcomeMessage,
+                  style: AppConstants.kTextStyleMessage,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppConstants.kNoRecipesMessage,
-                style: AppConstants.kTextStyleMessage,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  AppConstants.kNoRecipesMessage,
+                  style: AppConstants.kTextStyleMessage,
+                ),
               ),
-            ),
-          ]);
+            ],
+          );
   }
 }

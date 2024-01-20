@@ -33,4 +33,9 @@ class AppConstants {
     height: 10,
     color: Colors.black26,
   );
+
+  // UI keys
+  static const Key keyRecipeListView = Key('recipe_list');
+  static const Key keyNoRecipesView = Key('no_recipes_available');
+
 }

@@ -12,9 +12,6 @@ class ApiRepository<T extends Coding> {
   ModelCreator<T> creator;
   ApiRepository(this.creator);
   Client client = Client();
-
-  final String apiBaseUrl = globals.apiBaseUrl;
-
   final Map<String, String> headers = {"Content-Type": "application/json"};
 
   Future<Either<Exception, List<T>>> fetchAll({List<String>? searchTerms}) async {
