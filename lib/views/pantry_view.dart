@@ -139,6 +139,7 @@ class PantryView extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.black),
             ),
             leading: Checkbox(
+              key: ValueKey('${AppConstants.keyIngredientCheckbox}$index'),
               value: isSelected,
               onChanged: (value) {
                 provider.toggleSelection(ingredient);

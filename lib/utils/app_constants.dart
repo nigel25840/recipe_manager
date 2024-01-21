@@ -40,4 +40,5 @@ class AppConstants {
   static const Key keyNoRecipesView = Key('37e60294-69f7-4e8e-a6a6-f3094782d1a4');
   static const Key keyAddButton = Key('bd44bc1a-3d66-4d92-aca7-7c1e533f2025');
   static const Key keySearchRecipesButton = Key('eb5debe9-687e-46fd-93c6-2cc8adeed17e');
+  static const Key keyIngredientCheckbox = Key('ingredientCheckbox_');
 }
