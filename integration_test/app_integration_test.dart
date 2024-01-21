@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:recipe_management/main.dart' as app;
 import 'package:recipe_management/utils/app_constants.dart';
+import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,8 @@ void main() {
   String ingredient2 = 'shrimp';
   String ingredient3 = 'tomatoes';
   String ingredient4 = 'butter';
-  String ingredient5 = 'anchovies';
+  
+  const int delay = 1000;
 
   testWidgets('Test app flow', (WidgetTester tester) async {
     widgetTester = tester;
@@ -28,7 +30,7 @@ void main() {
     final menuDrawerFinder = find.byIcon(Icons.menu);
     expect(menuDrawerFinder, findsOneWidget);
     await tester.tap(menuDrawerFinder);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
     await tester.pumpAndSettle();
 
     // Find the 'Pantry' item in the drawer.
@@ -47,35 +49,66 @@ void main() {
     expect(addIngredientButton, findsOneWidget);
     expect(ingredientEntryText, findsOneWidget);
 
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: ));
 
     await tester.enterText(ingredientEntryText, ingredient1);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
 
     await tester.enterText(ingredientEntryText, ingredient2);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
 
     await tester.enterText(ingredientEntryText, ingredient3);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
 
     await tester.enterText(ingredientEntryText, ingredient4);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
 
     final ingredientFinder1 = find.text(ingredient1);
     expect(ingredientFinder1, findsOneWidget);
 
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(milliseconds: delay));
 
-    // tap the check the first ingredient
-    await tester.tap(ingredientFinder1);
-    await tester.pump(const Duration(seconds: 5));
+    // locate, verify and tap the check boxes in the first 3 items
+    final Finder firstIngredient = find.byKey(Key('${AppConstants.keyIngredientCheckbox}0'));
+    expect(firstIngredient, findsOneWidget);
+
+    final Finder secondIngredient = find.byKey(Key('${AppConstants.keyIngredientCheckbox}1'));
+    expect(secondIngredient, findsOneWidget);
+
+    final Finder thirdIngredient = find.byKey(Key('${AppConstants.keyIngredientCheckbox}2'));
+    expect(thirdIngredient, findsOneWidget);
+
+    await tester.tap(firstIngredient);
+    await tester.pump(const Duration(milliseconds: delay));
+
+    await tester.tap(secondIngredient);
+    await tester.pump(const Duration(milliseconds: delay));
+
+    await tester.tap(thirdIngredient);
+    await tester.pump(const Duration(milliseconds: delay));
+
+    // locate the floating action button (search button) and tap it
+    final Finder searchButtonFinder = find.byKey(AppConstants.keySearchRecipesButton);
+    expect(searchButtonFinder, findsOneWidget);
+
+    await tester.tap(searchButtonFinder);
+    await tester.pumpAndSettle();
+
+    // locate and tap the fist item in the recipes list
+    final Finder recipeTileFinder = find.byType(RecipeTile);
+    expect(recipeTileFinder, findsWidgets);
+    await tester.pump(const Duration(milliseconds: delay));
+    await tester.tap(recipeTileFinder.first);
+
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 10000));
   });
 }
