@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:conduit_codable/conduit_codable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:recipe_management/exceptions/exceptions.dart';
-import 'package:recipe_management/globals.dart' as globals;
 import 'package:http/http.dart' show Client, Response;
 import 'package:recipe_management/utils/app_constants.dart';
 

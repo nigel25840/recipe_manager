@@ -10,8 +10,8 @@ import 'package:recipe_management/views/widgets/recipe_tile.dart';
 /// In a larger application, separate integration tests would be added for
 /// different workflows. This would be achieved by navigating to the entry
 /// point of the workflow being integration tested.
-///
-/// Delays have been added to this integration test to better demonstrate the app flow
+
+/// Delays have been added to this integration test to better view the app flow
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

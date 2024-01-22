@@ -4,8 +4,8 @@ import 'package:recipe_management/exceptions/exceptions.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:recipe_management/repository/api_repository.dart';
 import 'package:recipe_management/repository/local_repository.dart';
-
-import '../model/recipe_model.dart';
+import 'package:recipe_management/model/recipe_model.dart';
+import 'package:recipe_management/utils/app_constants.dart';
 
 abstract class IAppFacade {
   Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List<String>? ingredients});
@@ -18,7 +18,7 @@ class AppFacade implements IAppFacade {
   late ApiRepository apiRepository;
 
   @override
-  // fetches all recipes, both remote and local
+  // fetches all recipes from spoonacular API
   Future<Either<Exception, List<T>>>? fetchRecipes<T extends Coding>({List<String>? ingredients}) async {
     apiRepository = ApiRepository<Recipe>(Recipe.new);
 
@@ -26,7 +26,7 @@ class AppFacade implements IAppFacade {
     Either<Exception, List<Coding>> eitherResponse = await apiRepository.fetchAll(searchTerms: ingredients);
     return await eitherResponse.fold(
         (exception) async {
-          return left(ServerFailure(code: 400, message: 'The request failed'));
+          return left(ServerFailure(code: 400, message: AppConstants.kServerError));
         },
         (success) {
           List<T> typedList = success.map<T>((coding) => coding as T).toList();

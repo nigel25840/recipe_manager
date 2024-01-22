@@ -117,8 +117,7 @@ class PantryView extends StatelessWidget {
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {
-                    // Undo the dismissal
-                    // provider.undoRemoveIngredient();
+                    // TODO: handle the undo request
                   },
                 ),
               ),

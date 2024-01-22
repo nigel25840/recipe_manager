@@ -5,7 +5,8 @@ import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// This class is used to fetch, add, & delete data that is persisted locally on the device
-/// It is only accessible through the AppFacade
+/// It is only accessible through the AppFacade. For the purpose of this demo, shared preferences
+/// is being used. In a real world app, a more robust persistence like Hive should be used
 
 class LocalRepository {
   static const String key = 'pantry_data_key';

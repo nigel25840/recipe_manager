@@ -13,7 +13,7 @@ class GroceryListView extends StatelessWidget {
     return Scaffold(
       endDrawer: MenuDrawer(),
       appBar: AppBar(
-        title: Text('Grocery List'),
+        title: Text(AppConstants.kGroceryTitle),
         backgroundColor: Colors.green,
       ),
       body: Padding(
