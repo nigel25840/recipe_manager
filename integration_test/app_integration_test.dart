@@ -52,6 +52,7 @@ void main() {
 
     await tester.pump(const Duration(milliseconds: delay));
 
+    // add some ingredients to the pantry list
     await tester.enterText(ingredientEntryText, ingredient1);
     await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
@@ -72,6 +73,7 @@ void main() {
     await tester.tap(addIngredientButton);
     await tester.pump(const Duration(milliseconds: delay));
 
+    // check that the ingredients are found in the list
     final ingredientFinder1 = find.text(ingredient1);
     expect(ingredientFinder1, findsOneWidget);
 
@@ -107,11 +109,13 @@ void main() {
     final Finder recipeTileFinder = find.byType(RecipeTile).first;
     expect(recipeTileFinder, findsOneWidget);
 
+    // NOTE: a bug exists that is preventing the tap event unless the actual text is tapped
+    // with more time, this would be addressed: following is a workaround
     final Finder textWidgetFinder = find.descendant(
       of: recipeTileFinder,
       matching: find.byType(Text),
     );
-    expect(textWidgetFinder, findsAtLeast(1));
+    expect(textWidgetFinder, findsWidgets);
 
     await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(textWidgetFinder.first);
@@ -123,6 +127,6 @@ void main() {
     expect(groceryTileFinder, findsWidgets);
 
     // long delay before closing the app
-    await tester.pump(const Duration(seconds: 10));
+    await tester.pump(const Duration(seconds: 5));
   });
 }
