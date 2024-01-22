@@ -17,7 +17,7 @@ void main() async {
   if(jsonDataList.isNotEmpty) {
     final Map<String, dynamic> jsonDataMap = jsonDataList.first;
     final archive = KeyedArchive.unarchive(jsonDataMap);
-    recipe = Recipe()..decode(archive);f
+    recipe = Recipe()..decode(archive);
   }
 
   test('Recipe data model is deserialized from json', () async {

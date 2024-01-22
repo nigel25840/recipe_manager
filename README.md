@@ -3,6 +3,8 @@
 A new Flutter project.
 
 ## About this project
+- This app uses Spoonacular.com API to fetch recipes based on ingredients on-hand
+- Tapping on a recipe in the results list shows ingredients needed and on-hand ingredients
 - AppFacade serves as a data source for both local and remote data. 
 - Behind AppFacade is LocalRepository and APIRepository which are accessible only through the AppFacade.
 - App uses SharedPreferences as a local data store.
