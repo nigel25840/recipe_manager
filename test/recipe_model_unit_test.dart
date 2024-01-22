@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:convert';
-
 import 'package:conduit_codable/conduit_codable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_management/model/recipe_model.dart';
 
 // tests that a Recipe model can be deserialized from json response
+// json data is in same directory: recipe_json.json
 
 void main() async {
   late Recipe recipe;

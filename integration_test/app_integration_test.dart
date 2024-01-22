@@ -14,6 +14,7 @@ void main() {
   String ingredient2 = 'shrimp';
   String ingredient3 = 'tomatoes';
   String ingredient4 = 'butter';
+  String ingredient5 = 'anchovies';
   
   const int delay = 500;
 
@@ -69,6 +70,11 @@ void main() {
     await tester.pump(const Duration(milliseconds: delay));
 
     await tester.enterText(ingredientEntryText, ingredient4);
+    await tester.pump(const Duration(milliseconds: delay));
+    await tester.tap(addIngredientButton);
+    await tester.pump(const Duration(milliseconds: delay));
+
+    await tester.enterText(ingredientEntryText, ingredient5);
     await tester.pump(const Duration(milliseconds: delay));
     await tester.tap(addIngredientButton);
     await tester.pump(const Duration(milliseconds: delay));
