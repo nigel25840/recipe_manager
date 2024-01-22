@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_management/dependencies.dart';
+import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/view_model/pantry_provider.dart';
 import 'package:recipe_management/view_model/recipe_provider.dart';
 import 'views/main_recipes_view.dart';
@@ -29,12 +30,12 @@ class MyApp extends StatelessWidget {
         // Add more providers as needed
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: AppConstants.kAppTitle,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MainRecipesView(title: 'Flutter Demo Home Page'),
+        home: MainRecipesView(title: AppConstants.kAppTitle),
       ),
     );
   }

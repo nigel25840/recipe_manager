@@ -6,9 +6,15 @@ import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/views/widgets/grocery_item_tile.dart';
 import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
+/// this integration test represents the flow of the entire application.
+/// In a larger application, separate integration tests would be added for
+/// different workflows. This would be achieved by navigating to the entry
+/// point of the workflow being integration tested.
+///
+/// Delays have been added to this integration test to better demonstrate the app flow
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  WidgetTester widgetTester;
 
   String ingredient1 = 'garlic';
   String ingredient2 = 'shrimp';
@@ -19,7 +25,6 @@ void main() {
   const int delay = 500;
 
   testWidgets('Test app flow', (WidgetTester tester) async {
-    widgetTester = tester;
     // Build our app and trigger a frame.
     app.main(); // This will execute the main function in your app
 

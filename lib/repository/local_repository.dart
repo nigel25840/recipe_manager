@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// This class is used to fetch, add, & delete data that is persisted locally on the device
+/// It is only accessible through the AppFacade
+
 class LocalRepository {
   static const String key = 'pantry_data_key';
 

@@ -7,6 +7,8 @@ import 'package:recipe_management/utils/app_constants.dart';
 import '../model/recipe_model.dart';
 
 /// this provider class is used to provide recipes
+/// RecipeProvider as a provider or viewmodel for the MainRecipesView view.
+/// Provides lists of recipes to send to the UI, returned from the API
 
 class RecipeProvider extends ChangeNotifier {
   List<Recipe> allRecipes = [];

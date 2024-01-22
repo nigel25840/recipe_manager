@@ -4,6 +4,9 @@ import 'package:recipe_management/model/ingredient_model.dart';
 import 'package:recipe_management/repository/app_facade.dart';
 import 'package:get_it/get_it.dart';
 
+/// PantryProvider as a provider or viewmodel for the Pantry view.
+/// Provides lists of ingredients to send to the UI
+
 class PantryProvider extends ChangeNotifier {
   ViewState _state = ViewState.idle;
   List<Ingredient> inStockIngredients = [];
