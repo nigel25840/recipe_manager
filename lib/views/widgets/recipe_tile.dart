@@ -13,13 +13,10 @@ class RecipeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 25),
+      padding: const EdgeInsets.only(top: 5, left: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Add image thumbnail here
-
-          // Expanded widget ensures that the Column takes up the available space
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

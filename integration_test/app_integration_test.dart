@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:recipe_management/main.dart' as app;
 import 'package:recipe_management/utils/app_constants.dart';
+import 'package:recipe_management/views/widgets/grocery_item_tile.dart';
 import 'package:recipe_management/views/widgets/recipe_tile.dart';
 
 void main() {
@@ -14,7 +15,7 @@ void main() {
   String ingredient3 = 'tomatoes';
   String ingredient4 = 'butter';
   
-  const int delay = 1000;
+  const int delay = 500;
 
   testWidgets('Test app flow', (WidgetTester tester) async {
     widgetTester = tester;
@@ -49,7 +50,7 @@ void main() {
     expect(addIngredientButton, findsOneWidget);
     expect(ingredientEntryText, findsOneWidget);
 
-    await tester.pump(const Duration(milliseconds: ));
+    await tester.pump(const Duration(milliseconds: delay));
 
     await tester.enterText(ingredientEntryText, ingredient1);
     await tester.pump(const Duration(milliseconds: delay));
@@ -103,12 +104,25 @@ void main() {
     await tester.pumpAndSettle();
 
     // locate and tap the fist item in the recipes list
-    final Finder recipeTileFinder = find.byType(RecipeTile);
-    expect(recipeTileFinder, findsWidgets);
+    final Finder recipeTileFinder = find.byType(RecipeTile).first;
+    expect(recipeTileFinder, findsOneWidget);
+
+    final Finder textWidgetFinder = find.descendant(
+      of: recipeTileFinder,
+      matching: find.byType(Text),
+    );
+    expect(textWidgetFinder, findsAtLeast(1));
+
     await tester.pump(const Duration(milliseconds: delay));
-    await tester.tap(recipeTileFinder.first);
+    await tester.tap(textWidgetFinder.first);
 
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 10000));
+    await tester.pump(const Duration(milliseconds: delay));
+
+    final Finder groceryTileFinder = find.byType(GroceryItemTile);
+    expect(groceryTileFinder, findsWidgets);
+
+    // long delay before closing the app
+    await tester.pump(const Duration(seconds: 10));
   });
 }
