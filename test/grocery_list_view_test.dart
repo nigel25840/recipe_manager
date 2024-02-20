@@ -30,7 +30,7 @@ void main() async {
     ..amount = 1.0
     ..onHand = false
     ..aisle = 'aisle1';
-  Ingredient ingredient2 = Ingredient().copyWith(name: 'ingredient2');
+  Ingredient ingredient2 = Ingredient().copyWith(item: 'ingredient2');
   List<Ingredient> ingredients = [ingredient1, ingredient2];
 
   Recipe recipe = Recipe()

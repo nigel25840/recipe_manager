@@ -39,6 +39,7 @@ class AppConstants {
 
   // repository keys
   static const String apiKey = '9cdd0725f3a1411fae547fba718cce83';
+  static const String chatGptKey = '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';
 
   // UI keys
   static const Key keyAddIngredientText = Key('9aee93df-7677-48a4-95bb-0dd012372efd');

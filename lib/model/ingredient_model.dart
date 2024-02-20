@@ -22,16 +22,16 @@ class Ingredient extends Coding {
   Ingredient copyWith({
     String? aisle,
     String? image,
-    String? name,
+    String? item,
     double? amount,
-    bool? onHand,
+    bool? available,
   }) {
     return Ingredient(
       aisle: aisle ?? this.aisle,
       image: image ?? this.image,
-      name: name ?? this.name,
+      name: item ?? this.name,
       amount: amount ?? this.amount,
-      onHand: onHand ?? this.onHand,
+      onHand: available ?? this.onHand,
     );
   }
 
