@@ -5,8 +5,11 @@ import 'package:recipe_management/model/recipe_model.dart';
 import 'package:recipe_management/utils/app_constants.dart';
 import 'package:recipe_management/view_model/recipe_provider.dart';
 import 'package:recipe_management/views/grocery_list_view.dart';
+import 'package:recipe_management/views/widgets/ai_recipe_tile.dart';
 import 'package:recipe_management/views/widgets/menu_drawer_view.dart';
 import 'package:recipe_management/views/widgets/recipe_tile.dart';
+
+import '../model/ai_recipe.dart';
 
 class MainRecipesView extends StatelessWidget {
   late final String title;
@@ -37,16 +40,16 @@ class MainRecipesView extends StatelessWidget {
         ? ListView.separated(
             key: AppConstants.keyRecipeListView,
             itemBuilder: (context, index) {
-              Recipe recipe = provider.allRecipes[index];
+              AIRecipe recipe = provider.aiRecipes[index];
               return GestureDetector(
-                child: RecipeTile(recipe: recipe),
+                child: AIRecipeTile(recipe: recipe),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GroceryListView(recipe: recipe),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => GroceryListView(recipe: recipe),
+                  //   ),
+                  // );
                 },
               );
             },

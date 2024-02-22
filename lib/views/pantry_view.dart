@@ -29,7 +29,8 @@ class PantryView extends StatelessWidget {
                 // TODO: this should be replaced with an alert dialog informing the user to select some ingredients
                 if(selections.isEmpty) return;
 
-                Provider.of<RecipeProvider>(context, listen: false).getAllRecipes(ingredients: selections);
+                // Provider.of<RecipeProvider>(context, listen: false).getAllRecipes(ingredients: selections);
+                Provider.of<RecipeProvider>(context, listen: false).getCustomRecipe(prompt: 'prompt');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MainRecipesView()),
